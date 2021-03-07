@@ -73,3 +73,6 @@ flutter:
   assets:
     - assets/background.jpg
     - assets/tv_color.riv
+    # - assets/neon_car.riv
+    # - assets/neon_car.v2.riv
+    - assets/neon_car.v3.riv
