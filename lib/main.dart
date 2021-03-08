@@ -35,6 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Artboard _artboard;
   RiveAnimationController _carleavecontroller;
+  RiveAnimationController _carJoinController;
   bool _leave = false;
 
   @override
@@ -65,6 +66,38 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     setState(() {
       _carleavecontroller.isActive = _leave = carLeave;
+    });
+    Future.delayed(const Duration(seconds: 1, milliseconds: 800),(){
+      _resetCar();
+      //TODO: GO TO ANOTHER PAGE
+      _arrivecar();
+    });
+  }
+  void _arrivecar(){
+    if(_carJoinController == null){
+      _artboard.addController(
+        _carJoinController = SimpleAnimation('arrive'),
+      );
+    }
+    setState(() {
+      _carJoinController.isActive = true;
+    });
+  }
+  void _resetCar(){
+    if(_carleavecontroller != null){
+      _artboard.removeController(_carleavecontroller);
+    }
+    if(_carJoinController != null){
+      _artboard.removeController(_carJoinController);
+    }
+    setState(() {
+      print(_leave);
+      _carleavecontroller.isActive = _leave = false;
+      _carleavecontroller = null;
+      if(_carJoinController != null){
+        _carJoinController.isActive = false;
+        _carJoinController = null;
+      }
     });
   }
 
@@ -151,6 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 GestureDetector(
                                   onTap: () {
                                     _carLeave(true);
+
                                     },
                                   child: Container(
                                     //padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
