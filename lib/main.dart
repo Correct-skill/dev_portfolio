@@ -107,11 +107,12 @@ class _MyHomePageState extends State<MyHomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-        decoration: BoxDecoration(
+        /*decoration: BoxDecoration(
             image: DecorationImage(
           image: AssetImage('assets/background.jpg'),
           fit: BoxFit.cover,
-        )),
+        )),*/
+        color: Colors.black,
         child: Stack(
           children: [
             _artboard == null
