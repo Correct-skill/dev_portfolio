@@ -76,3 +76,5 @@ flutter:
     # - assets/neon_car.riv
     # - assets/neon_car.v2.riv
     - assets/neon_car.v3.riv
+    - assets/spaceman.riv
+    - assets/planet.riv

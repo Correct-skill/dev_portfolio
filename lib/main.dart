@@ -34,9 +34,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Artboard _artboard;
-  RiveAnimationController _carleavecontroller;
-  RiveAnimationController _carJoinController;
-  bool _leave = false;
+  // RiveAnimationController _carleavecontroller;
+  // RiveAnimationController _carJoinController;
+  // bool _leave = false;
 
   @override
   void initState() {
@@ -46,60 +46,60 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _loadRiveFile() async {
     //final bytes = await rootBundle.load('assets/tv_color.riv');
-    final bytes = await rootBundle.load('assets/neon_car.v3.riv');
+    final bytes = await rootBundle.load('assets/planet.riv');
     final file = RiveFile();
     if (file.import(bytes)) {
       // Select an animation by its name
       setState(() => _artboard = file.mainArtboard
         ..addController(
           //SimpleAnimation('loop'),
-          SimpleAnimation('idle'),
+          SimpleAnimation('Idle'),
         ));
     }
   }
 
-  void _carLeave(bool carLeave){
-    if(_carleavecontroller == null){
-      _artboard.addController(
-        _carleavecontroller = SimpleAnimation('leave'),
-      );
-    }
-    setState(() {
-      _carleavecontroller.isActive = _leave = carLeave;
-    });
-    Future.delayed(const Duration(seconds: 1, milliseconds: 800),(){
-      _resetCar();
-      //TODO: GO TO ANOTHER PAGE
-      _arrivecar();
-    });
-  }
-  void _arrivecar(){
-    if(_carJoinController == null){
-      _artboard.addController(
-        _carJoinController = SimpleAnimation('arrive'),
-      );
-    }
-    setState(() {
-      _carJoinController.isActive = true;
-    });
-  }
-  void _resetCar(){
-    if(_carleavecontroller != null){
-      _artboard.removeController(_carleavecontroller);
-    }
-    if(_carJoinController != null){
-      _artboard.removeController(_carJoinController);
-    }
-    setState(() {
-      print(_leave);
-      _carleavecontroller.isActive = _leave = false;
-      _carleavecontroller = null;
-      if(_carJoinController != null){
-        _carJoinController.isActive = false;
-        _carJoinController = null;
-      }
-    });
-  }
+  // void _carLeave(bool carLeave){
+  //   if(_carleavecontroller == null){
+  //     _artboard.addController(
+  //       _carleavecontroller = SimpleAnimation('leave'),
+  //     );
+  //   }
+  //   setState(() {
+  //     _carleavecontroller.isActive = _leave = carLeave;
+  //   });
+  //   Future.delayed(const Duration(seconds: 1, milliseconds: 800),(){
+  //     _resetCar();
+  //     //TODO: GO TO ANOTHER PAGE
+  //     _arrivecar();
+  //   });
+  // }
+  // void _arrivecar(){
+  //   if(_carJoinController == null){
+  //     _artboard.addController(
+  //       _carJoinController = SimpleAnimation('arrive'),
+  //     );
+  //   }
+  //   setState(() {
+  //     _carJoinController.isActive = true;
+  //   });
+  // }
+  // void _resetCar(){
+  //   if(_carleavecontroller != null){
+  //     _artboard.removeController(_carleavecontroller);
+  //   }
+  //   if(_carJoinController != null){
+  //     _artboard.removeController(_carJoinController);
+  //   }
+  //   setState(() {
+  //     print(_leave);
+  //     _carleavecontroller.isActive = _leave = false;
+  //     _carleavecontroller = null;
+  //     if(_carJoinController != null){
+  //       _carJoinController.isActive = false;
+  //       _carJoinController = null;
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -117,20 +117,20 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             _artboard == null
                 ? SizedBox(
-              height: screenHeight / 2,
-            )
+                    height: screenHeight / 2,
+                  )
                 : Rive(
-              artboard: _artboard,
-              //useArtboardSize: true,
-              fit: BoxFit.fitWidth,
-            ),
+                    artboard: _artboard,
+                    //useArtboardSize: true,
+                    fit: BoxFit.fitWidth,
+                  ),
             Scaffold(
               backgroundColor: Colors.transparent,
               body: Stack(
                 children: <Widget>[
                   //BackdropFilter(
-                    //filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                    //child: Container(color: Colors.black38.withOpacity(0)),
+                  //filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                  //child: Container(color: Colors.black38.withOpacity(0)),
                   //),
                   Center(
                     child: FadeAnimation(
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 SizedBox(
-                                  height: screenHeight / 16,
+                                  height: screenHeight / 25,
                                   width: 10,
                                   //child: Container(height: 10),
                                 ),
@@ -155,75 +155,72 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 60.0,
                                         fontFamily: 'BebasNeue')),
+                                SizedBox(
+                                  height: screenHeight / 1.5,
+                                ),
                                 Text('A Freelance Web/App developer',
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontFamily: 'BebasNeue',
                                         fontSize: 30.0)),
 
-                                SizedBox(
-                                  height: screenHeight / 2,
-                                ),
+                                // Expanded(
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.all(8.0),
+                                //     child: _artboard == null
+                                //         ? SizedBox(
+                                //             height: screenHeight / 2,
+                                //           )
+                                //         : Rive(
+                                //             artboard: _artboard,
+                                //             useArtboardSize: true,
+                                //             fit: BoxFit.fitHeight,
+                                //           ),
+                                //   ),
+                                // ),
 
-
-                                /*
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: _artboard == null
-                                        ? SizedBox(
-                                            height: screenHeight / 2,
-                                          )
-                                        : Rive(
-                                            artboard: _artboard,
-                                            //useArtboardSize: true,
-                                            fit: BoxFit.fitHeight,
-                                          ),
-                                  ),
-                                ),
-                                */
-                                GestureDetector(
-                                  onTap: () {
-                                    _carLeave(true);
-
-                                    },
-                                  child: Container(
-                                    //padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                                    width: screenWidth,
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                            'Tap the arrow to Learn More About What I do',
-                                            style: TextStyle(
-                                                color:
-                                                    Colors.white.withOpacity(0.8),
-                                                fontFamily: 'BebasNeue',
-                                                fontSize: 30.0)),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: screenWidth / 2 - 30.0,
-                                              height: screenHeight / 7,
-                                            ),
-                                            Container(
-                                                padding: EdgeInsets.all(10),
-                                                child: Icon(
-                                                  Icons.arrow_forward_ios_outlined,
-                                                  size: 30,
-                                                  color:
-                                                      Colors.white.withOpacity(0.8),
-                                                )),
-                                            SizedBox(
-                                                width: screenWidth / 2 - 30.0,
-                                                height: screenHeight / 7),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                // GestureDetector(
+                                //   onTap: () {
+                                //     _carLeave(true);
+                                //   },
+                                //   child: Container(
+                                //     //padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                                //     width: screenWidth,
+                                //     child: Column(
+                                //       children: [
+                                //         Text(
+                                //             'Tap the arrow to Learn More About What I do',
+                                //             style: TextStyle(
+                                //                 color: Colors.white
+                                //                     .withOpacity(0.8),
+                                //                 fontFamily: 'BebasNeue',
+                                //                 fontSize: 30.0)),
+                                //         Row(
+                                //           mainAxisAlignment:
+                                //               MainAxisAlignment.start,
+                                //           children: [
+                                //             SizedBox(
+                                //               width: screenWidth / 2 - 30.0,
+                                //               height: screenHeight / 7,
+                                //             ),
+                                //             Container(
+                                //                 padding: EdgeInsets.all(10),
+                                //                 child: Icon(
+                                //                   Icons
+                                //                       .arrow_forward_ios_outlined,
+                                //                   size: 30,
+                                //                   color: Colors.white
+                                //                       .withOpacity(0.8),
+                                //                 )),
+                                //             SizedBox(
+                                //                 width: screenWidth / 2 - 30.0,
+                                //                 height: screenHeight / 7),
+                                //           ],
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -255,8 +252,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      js.context
-                          .callMethod('open', ['mailto:shubhaankar@hotmail.com']);
+                      js.context.callMethod(
+                          'open', ['mailto:shubhaankar@hotmail.com']);
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 20.0),
