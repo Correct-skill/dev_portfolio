@@ -240,7 +240,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       js.context.callMethod(
-                          'open', ['https://github.com/Shubhaankar-sharma']);
+                          'open', ['https://github.com/Correct-skill']);
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 20.0),
